@@ -21,11 +21,12 @@ function validateRepositoryId(request, response, next){
   return next();
 }
 
-
+//List all repositories
 app.get("/repositories", (request, response) => {
   return response.json(repositories);
 });
 
+//Create a repository
 app.post("/repositories", (request, response) => {
   
   const { title, url, techs } = request.body;
@@ -44,6 +45,7 @@ app.post("/repositories", (request, response) => {
 
 });
 
+//Update a repository by ID 
 app.put("/repositories/:id", validateRepositoryId, (request, response) => {
   const { id } = request.params;
   const { title, url, techs } = request.body;  
@@ -67,6 +69,7 @@ app.put("/repositories/:id", validateRepositoryId, (request, response) => {
   return response.json(repository);
 });
 
+//Delete a repository by ID
 app.delete("/repositories/:id", validateRepositoryId, (request, response) => {
   const { id } = request.params;
 
@@ -81,6 +84,7 @@ app.delete("/repositories/:id", validateRepositoryId, (request, response) => {
   return response.status(204).send();
 });
 
+//Like the repository by repository ID
 app.post("/repositories/:id/like", validateRepositoryId, (request, response) => {
   const { id } = request.params;
   
